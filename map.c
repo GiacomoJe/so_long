@@ -268,11 +268,11 @@ void    load_map(void *mlx_program)
             }
             if(game->map[y][x] == 'P')
             {
-                // if(game->move == 1)
-                //     printf("posicao - %f - x = %d\n", x * (increment_x * game->sprites.person.anim_rum), x);
+                if(game->move == 1)
+                    printf("posicao - %f - x = %d\n", x * (increment_x * game->sprites.person.anim_rum), x);
                 if(game->move == 1)
                 {
-                    game->sprites.person.anim_rum += 0.05;
+                    game->sprites.person.anim_rum += 0.10;
                     // printf("%f\n", game->sprites.person.anim_rum);
                 }
                 mlx_put_image_to_window(game->mlx, game->mlx_win.mlx_win, game->sprites.tiles.img, x * increment_x, y * increment_y);
