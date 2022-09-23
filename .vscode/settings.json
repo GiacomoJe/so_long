@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "mlx_int.h": "c",
+        "string.h": "c",
+        "stdio.h": "c",
+        "get_next_line.h": "c",
+        "stdlib.h": "c",
+        "mlx_sample.h": "c",
+        "unistd.h": "c",
+        "so_long.h": "c",
+        "iosfwd": "c",
+        "iterator": "c",
+        "__string": "c",
+        "ios": "c"
+    }
+}
