@@ -117,7 +117,6 @@ int    check_map(char *line, int x, int vectors[2])
 void    gen_map(char **mapstr, int vectors[2])
 {
     int x;
-    int y;
     int fd;
 
     fd = open("map1.ber", O_RDWR);
@@ -129,15 +128,13 @@ void    gen_map(char **mapstr, int vectors[2])
             close_game(&*mapstr, x);
         x++;
     }
-    *(mapstr + x) = NULL;
 }
 
 char    **alloc_strmap(int vectors[2])
 {
-    int i;
     char **map_str;
-    i = 0;
-    map_str = malloc(sizeof(char *) * vectors[0] + 1);
+
+    map_str = malloc(sizeof(char *) * vectors[0]);
     gen_map(&*map_str, vectors);
     return(map_str);
 }
@@ -146,7 +143,6 @@ char    **file_map(int fd, void *mlx_program)
 {
     t_game *game = (t_game *)mlx_program;
     int vectors[2];
-    int number_columns;
     char c;
     int linecheck;
     char **map_str;
@@ -191,22 +187,33 @@ void    gen_tiles(void *mlx_program)
 {
     t_game *game = (t_game *)mlx_program;
 
-    game->sprites.person.anim_frame = 10;
+    game->sprites.person.anim_frame = 4;
     game->sprites.person.framecount = 0;
     game->sprites.coin.anim_frame = 20;
     game->sprites.coin.framecount = 0;
 
     game->sprites.box.img = mlx_xpm_file_to_image(game->mlx, "./sprites/box/tile-box-64px.xpm", &game->sprites.box.img_width, &game->sprites.box.img_height);
     game->sprites.tiles.img = mlx_xpm_file_to_image(game->mlx, "./sprites/tile/tile-64px.xpm", &game->sprites.tiles.img_width, &game->sprites.tiles.img_height);
-    game->sprites.coin.img = mlx_xpm_file_to_image(game->mlx, "./sprites/collectable/diamond.xpm", &game->sprites.coin.img_width, &game->sprites.coin.img_height);
     game->sprites.coin.img_0 = mlx_xpm_file_to_image(game->mlx, "./sprites/collectable/diamond.xpm", &game->sprites.coin.img_width, &game->sprites.coin.img_height);
     game->sprites.coin.img_1 = mlx_xpm_file_to_image(game->mlx, "./sprites/collectable/diamond-2.xpm", &game->sprites.coin.img_width, &game->sprites.coin.img_height);
+    game->sprites.coin.img = game->sprites.coin.img_0;
+    game->sprites.person.img = game->sprites.person.idle_image_0;
     game->sprites.exit.img = mlx_xpm_file_to_image(game->mlx, "./sprites/exit/exit-closed.xpm", &game->sprites.exit.img_width, &game->sprites.exit.img_height);
     game->sprites.exit.exit_open = mlx_xpm_file_to_image(game->mlx, "./sprites/exit/exit-open.xpm", &game->sprites.exit.img_width, &game->sprites.exit.img_height);
-    game->sprites.person.img = mlx_xpm_file_to_image(game->mlx, "./sprites/stand/1.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
-    game->sprites.person.idle_image_0 = mlx_xpm_file_to_image(game->mlx, "./sprites/stand/2.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
-    game->sprites.person.idle_image_1 = mlx_xpm_file_to_image(game->mlx, "./sprites/stand/3.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
-    game->sprites.person.idle_image_2 = mlx_xpm_file_to_image(game->mlx, "./sprites/stand/4.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
+    game->sprites.person.idle_image_0 = mlx_xpm_file_to_image(game->mlx, "./sprites/stand/stand2.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
+    game->sprites.person.idle_image_1 = mlx_xpm_file_to_image(game->mlx, "./sprites/stand/stand3.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
+    game->sprites.person.idle_image_2 = mlx_xpm_file_to_image(game->mlx, "./sprites/stand/stand4.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
+    game->sprites.person.idle_image_3 = mlx_xpm_file_to_image(game->mlx, "./sprites/stand/stand5.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
+    game->sprites.person.idle_image_4 = mlx_xpm_file_to_image(game->mlx, "./sprites/stand/stand6.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
+    game->sprites.person.idle_image_5 = mlx_xpm_file_to_image(game->mlx, "./sprites/stand/stand7.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
+    game->sprites.person.idle_image_6 = mlx_xpm_file_to_image(game->mlx, "./sprites/stand/stand8.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
+    game->sprites.person.idle_image_7 = mlx_xpm_file_to_image(game->mlx, "./sprites/stand/stand9.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
+    game->sprites.person.idle_image_8 = mlx_xpm_file_to_image(game->mlx, "./sprites/stand/stand10.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
+    game->sprites.person.idle_image_9 = mlx_xpm_file_to_image(game->mlx, "./sprites/stand/stand11.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
+    game->sprites.person.idle_image_10 = mlx_xpm_file_to_image(game->mlx, "./sprites/stand/stand12.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
+    game->sprites.person.idle_image_11 = mlx_xpm_file_to_image(game->mlx, "./sprites/stand/stand13.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
+    game->sprites.person.idle_image_12 = mlx_xpm_file_to_image(game->mlx, "./sprites/stand/stand14.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
+    game->sprites.person.idle_image_13 = mlx_xpm_file_to_image(game->mlx, "./sprites/stand/stand15.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
 
     game->sprites.person.anim_end.img_1 = mlx_xpm_file_to_image(game->mlx, "./sprites/finish/endgame_1.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
     game->sprites.person.anim_end.img_2 = mlx_xpm_file_to_image(game->mlx, "./sprites/finish/endgame_2.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
@@ -220,12 +227,13 @@ void    gen_tiles(void *mlx_program)
     game->sprites.person.anim_end.img_10 = mlx_xpm_file_to_image(game->mlx, "./sprites/finish/endgame_10.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
     game->sprites.person.anim_end.img_11 = mlx_xpm_file_to_image(game->mlx, "./sprites/finish/endgame_11.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
     game->sprites.person.anim_end.img_12 = mlx_xpm_file_to_image(game->mlx, "./sprites/finish/endgame_12.xpm", &game->sprites.person.img_width, &game->sprites.person.img_height);
+    game->sprites.coin.img = game->sprites.coin.img_0;
+    game->sprites.person.img = game->sprites.person.idle_image_0;
 }
 
 void    load_map(void *mlx_program)
 {
     t_game *game = (t_game *)mlx_program;
-    char    *line;
     int x;
     int y;
     int increment_x;
@@ -268,8 +276,8 @@ void    load_map(void *mlx_program)
             }
             if(game->map[y][x] == 'P')
             {
-                if(game->move == 1)
-                    printf("posicao - %f - x = %d\n", x * (increment_x * game->sprites.person.anim_rum), x);
+                // if(game->move == 1)
+                //     printf("posicao - %f - x = %d\n", x * (increment_x * game->sprites.person.anim_rum), x);
                 if(game->move == 1)
                 {
                     game->sprites.person.anim_rum += 0.10;
@@ -351,6 +359,80 @@ int move_person(void *mlx_program, char direction)
     return (0);
 }
 
+int    close_window(void *param)
+{
+	t_game	*game = (t_game *)param;
+    int i;
+
+    printf("%p\n", game->sprites.person.img);
+    printf("%p\n", game->sprites.coin.img);
+    mlx_clear_window(game->mlx, game->mlx_win.mlx_win);
+    printf("Tela limpa Finalizado\n");
+    mlx_destroy_image(game->mlx, game->sprites.box.img);
+    printf("Box destruida\n");
+    mlx_destroy_image(game->mlx, game->sprites.tiles.img);
+    printf("Tiles destruidas\n");
+    mlx_destroy_image(game->mlx, game->sprites.coin.img_1);
+    printf("Coin IMG-1 destruida\n");
+    mlx_destroy_image(game->mlx, game->sprites.coin.img_0);
+    printf("Coin IMG-0 destruida\n");
+    mlx_destroy_image(game->mlx, game->sprites.exit.img);
+    printf("Saida destruida\n");
+    mlx_destroy_image(game->mlx, game->sprites.exit.exit_open);
+    printf("Saida aberta destruida\n");
+    mlx_destroy_image(game->mlx, game->sprites.person.idle_image_2);
+    printf("Personagem IDLE-2 destruido\n");
+    mlx_destroy_image(game->mlx, game->sprites.person.idle_image_1);
+    printf("Personagem IDLE-1 destruido\n");
+    mlx_destroy_image(game->mlx, game->sprites.person.idle_image_0);
+    printf("Personagem IDLE-0 destruido\n");
+    mlx_destroy_image(game->mlx, game->sprites.person.anim_end.img_1);
+    printf("Personagem_END IMG_1 destruido\n");
+    mlx_destroy_image(game->mlx, game->sprites.person.anim_end.img_2);
+    printf("Personagem_END IMG_2 destruido\n");
+    mlx_destroy_image(game->mlx, game->sprites.person.anim_end.img_3);
+    printf("Personagem_END IMG_3 destruido\n");
+    mlx_destroy_image(game->mlx, game->sprites.person.anim_end.img_4);
+    printf("Personagem_END IMG_4 destruido\n");
+    mlx_destroy_image(game->mlx, game->sprites.person.anim_end.img_5);
+    printf("Personagem_END IMG_5 destruido\n");
+    mlx_destroy_image(game->mlx, game->sprites.person.anim_end.img_6);
+    printf("Personagem_END IMG_6 destruido\n");
+    mlx_destroy_image(game->mlx, game->sprites.person.anim_end.img_7);
+    printf("Personagem_END IMG_7 destruido\n");
+    mlx_destroy_image(game->mlx, game->sprites.person.anim_end.img_8);
+    printf("Personagem_END IMG_8 destruido\n");
+    mlx_destroy_image(game->mlx, game->sprites.person.anim_end.img_9);
+    printf("Personagem_END IMG_9 destruido\n");
+    mlx_destroy_image(game->mlx, game->sprites.person.anim_end.img_10);
+    printf("Personagem_END IMG_10 destruido\n");
+    mlx_destroy_image(game->mlx, game->sprites.person.anim_end.img_11);
+    printf("Personagem_END IMG_11 destruido\n");
+    mlx_destroy_image(game->mlx, game->sprites.person.anim_end.img_12);
+    printf("Personagem_END IMG_12 destruido\n");
+    mlx_destroy_window(game->mlx, game->mlx_win.mlx_win);
+    printf("janela destruida\n");
+    // mlx_destroy_display(game->mlx);
+    // printf("Display destruido\n");
+    // mlx_loop_end(game->mlx);
+    // printf("Loop Finalizado\n");
+    free(game->movements);
+    printf("Movements Finalizado\n");
+    i = 0;
+    while(i<=5)
+    {
+        printf("%s", game->map[i]);
+        free(game->map[i]);
+        i++;
+    }
+    free(game->map);
+    printf("\nMapa FREE\n");
+    free(game->mlx);
+    printf("Game FREE\n");
+    exit(0);
+    return(0);
+}
+
 int	press_key(int keycode, void *mlx_program)
 {
     t_game *game = (t_game *)mlx_program;
@@ -365,23 +447,22 @@ int	press_key(int keycode, void *mlx_program)
     //printf("keycode - %d\n", keycode);
     if(keycode == 53)
     {
-            mlx_destroy_window(game->mlx, game->mlx_win.mlx_win);
-            free(game->map);
-            exit(0);
+            close_window(game);
     }
-        if(keycode == 0)
+        if(keycode == A_KEY)
             check = move_person(game, 'A');
-        if(keycode == 2)
+        if(keycode == D_KEY)
             check = move_person(game, 'D');
-        if(keycode == 1)
+        if(keycode == S_KEY)
             check = move_person(game, 'S');
-        if(keycode == 13)
+        if(keycode == W_KEY)
             check = move_person(game, 'W');
         if(check == 1)
         {
             game->map[y][x] = '0';
             moves++;
         game->move = 1;
+        game->sprites.person.framecount = 0;
         game->sprites.person.anim_rum = 0;
         game->movements = ft_itoa(moves);
         // printf("Coins restantes - %d - %d\n", game->coins, check);
@@ -391,6 +472,7 @@ int	press_key(int keycode, void *mlx_program)
         {
             game->map[y][x] = '0';
             game->game_status = 1;
+            game->sprites.person.framecount = 0;
         }
 
 	return (0);
@@ -433,13 +515,36 @@ void    anim_person(void *param)
             game->sprites.person.img = game->sprites.person.idle_image_0;
         else if (game->sprites.person.framecount == game->sprites.person.anim_frame * 2)
             game->sprites.person.img = game->sprites.person.idle_image_1;
-        else if (game->sprites.person.framecount >= game->sprites.person.anim_frame * 3)
-        {
+        else if (game->sprites.person.framecount == game->sprites.person.anim_frame * 3)
             game->sprites.person.img = game->sprites.person.idle_image_2;
+        else if (game->sprites.person.framecount == game->sprites.person.anim_frame * 4)
+            game->sprites.person.img = game->sprites.person.idle_image_3;
+        else if (game->sprites.person.framecount == game->sprites.person.anim_frame * 5)
+            game->sprites.person.img = game->sprites.person.idle_image_4;
+        else if (game->sprites.person.framecount == game->sprites.person.anim_frame * 6)
+            game->sprites.person.img = game->sprites.person.idle_image_5;
+        else if (game->sprites.person.framecount == game->sprites.person.anim_frame * 7)
+            game->sprites.person.img = game->sprites.person.idle_image_6;
+        else if (game->sprites.person.framecount == game->sprites.person.anim_frame * 8)
+            game->sprites.person.img = game->sprites.person.idle_image_7;
+        else if (game->sprites.person.framecount == game->sprites.person.anim_frame * 9)
+            game->sprites.person.img = game->sprites.person.idle_image_8;
+        else if (game->sprites.person.framecount == game->sprites.person.anim_frame * 10)
+            game->sprites.person.img = game->sprites.person.idle_image_9;
+        else if (game->sprites.person.framecount == game->sprites.person.anim_frame * 11)
+            game->sprites.person.img = game->sprites.person.idle_image_10;
+        else if (game->sprites.person.framecount == game->sprites.person.anim_frame * 12)
+            game->sprites.person.img = game->sprites.person.idle_image_11;
+        else if (game->sprites.person.framecount == game->sprites.person.anim_frame * 13)
+            game->sprites.person.img = game->sprites.person.idle_image_12;
+        else if (game->sprites.person.framecount >= game->sprites.person.anim_frame * 14)
+        {
+            game->sprites.person.img = game->sprites.person.idle_image_13;
             game->sprites.person.framecount = 0;
         }
     }
 	game->sprites.person.framecount += 1;
+    mlx_do_sync(game->mlx);
 }
 
 void    anim_coin(void *param)
@@ -448,18 +553,18 @@ void    anim_coin(void *param)
 
     if (game->sprites.coin.framecount == game->sprites.coin.anim_frame)
 		game->sprites.coin.img = game->sprites.coin.img_0;
-	else if (game->sprites.coin.framecount == game->sprites.coin.anim_frame * 3)
+	else if (game->sprites.coin.framecount == game->sprites.coin.anim_frame * 2)
     {
 		game->sprites.coin.img = game->sprites.coin.img_1;
         game->sprites.coin.framecount = 0;
     }
 	game->sprites.coin.framecount += 1;
+    mlx_do_sync(game->mlx);
 }
 
 int	ft_update (void *param)
 {
 	t_game	*game = (t_game *)param;
-	static int	frame;
 
     anim_person(game);
     anim_coin(game);
@@ -469,8 +574,8 @@ int	ft_update (void *param)
 
 void    load_mlx(int map)
 {
-    char    *line;
     t_game   game;
+
     game.sprites.person.anim_rum = 1;
     game.movements = "0";
     game.game_status = 0;
@@ -493,7 +598,7 @@ void    load_mlx(int map)
     game.mlx_win.mlx_win = mlx_new_window(game.mlx, game.mlx_win.vector.x, game.mlx_win.vector.y, "SO_LONG JGIACOMO");
     mlx_key_hook(game.mlx_win.mlx_win, press_key, &game);
     mlx_loop_hook(game.mlx, *ft_update, &game);
-    load_map(&game);
+    mlx_hook(game.mlx_win.mlx_win, 17, 1L<<0, close_window, &game);
     mlx_loop(game.mlx);
 }
 

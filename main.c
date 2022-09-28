@@ -4,7 +4,7 @@
 int	main()
 {
     int fd;
-    int x = 0;
+
     fd = open("map1.ber", O_RDWR);
     if(fd == -1)
     {

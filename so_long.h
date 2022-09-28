@@ -5,11 +5,16 @@
 # include <mlx.h>
 #include <stdio.h>
 #include <string.h>
+#include "keys.h"
 # include "./includes/gnl/get_next_line.h"
 
 # ifndef ANIMATION_FRAMES
 #  define ANIMATION_FRAMES 10
 # endif
+
+#define MLX_SYNC_IMAGE_WRITABLE		1
+#define MLX_SYNC_WIN_FLUSH_CMD		2
+#define MLX_SYNC_WIN_CMD_COMPLETED	3
 
 typedef int bool;
 #define TRUE 1
@@ -69,6 +74,17 @@ typedef struct	s_person{
     void        *idle_image_0;
     void        *idle_image_1;
     void        *idle_image_2;
+	void        *idle_image_3;
+    void        *idle_image_4;
+    void        *idle_image_5;
+	void        *idle_image_6;
+    void        *idle_image_7;
+    void        *idle_image_8;
+	void        *idle_image_9;
+    void        *idle_image_10;
+    void        *idle_image_11;
+	void        *idle_image_12;
+    void        *idle_image_13;
 	t_anim_end	anim_end;
 	char		*path;
 	int			img_width;
